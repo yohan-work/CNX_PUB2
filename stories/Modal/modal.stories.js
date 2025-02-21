@@ -24,6 +24,32 @@ ${modalCss}
 ${modalJs}
         `
       }
+    },
+    viewport: {
+      viewports: {
+        mobile: {
+          name: '모바일',
+          styles: {
+            width: '360px',
+            height: '640px',
+          },
+        },
+        tablet: {
+          name: '태블릿',
+          styles: {
+            width: '768px',
+            height: '1024px',
+          },
+        },
+        desktop: {
+          name: '데스크톱',
+          styles: {
+            width: '1280px',
+            height: '800px',
+          },
+        },
+      },
+      defaultViewport: 'desktop',
     }
   }
 };
