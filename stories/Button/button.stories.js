@@ -1,6 +1,7 @@
 import { Button } from './button.js';
 import buttonHtml from './button.html?raw';
-import buttonCss from './button.css?raw';  // CSS 파일도 raw로 import
+import buttonCss from './button.css?raw';
+import buttonJs from './button.js?raw';
 import './button.css';
 
 // 메타데이터 설정
@@ -10,7 +11,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '테스트 아 아 아 응답 응답'
+        component: '다양한 스타일과 크기를 지원하는 버튼 컴포넌트입니다.'
       },
       source: {
         // 코드 예제 표시
@@ -26,40 +27,44 @@ export default {
     }
   },
   argTypes: {
-    label: { 
+    label: {
       control: 'text',
-      description: '버튼에 표시될 텍스트'
+      description: '버튼에 표시될 텍스트',
+      defaultValue: 'Button'
     },
-    variant: {
-      control: { type: 'select', options: ['primary', 'secondary'] },
-      description: '버튼의 스타일 변형'
+    primary: {
+      control: 'boolean',
+      description: '주요 버튼 여부',
+      defaultValue: false
+    },
+    backgroundColor: {
+      control: 'color',
+      description: '버튼의 배경색'
     },
     size: {
-      control: { type: 'select', options: ['small', 'medium', 'large'] },
-      description: '버튼의 크기'
+      control: { 
+        type: 'select',
+        options: ['small', 'medium', 'large']
+      },
+      description: '버튼의 크기',
+      defaultValue: 'medium'
+    },
+    onClick: {
+      action: 'clicked',
+      description: '클릭 이벤트 핸들러'
     }
   }
 };
 
 // 스토리 정의
 export const Primary = {
-  render: (args) => {
-    const container = document.createElement('div');
-    container.innerHTML = buttonHtml;
-    
-    const buttonElement = container.querySelector('.btn');
-    const button = new Button(buttonElement);
-    
-    button.setText(args.label);
-    button.setVariant(args.variant);
-    button.setSize(args.size);
-    
-    return container;
-  },
+  render: (args) => new Button({
+    ...args,
+    primary: true
+  }),
   args: {
-    label: '보여지는 텍스트',
-    variant: 'primary',
-    size: 'medium'
+    label: '주요 버튼',
+    primary: true
   },
   parameters: {
     docs: {
@@ -72,25 +77,30 @@ export const Primary = {
 
 // 다양한 상태의 버튼 예제
 export const Secondary = {
-  ...Primary,
+  render: (args) => new Button(args),
   args: {
-    ...Primary.args,
-    variant: 'secondary'
-  }
-};
-
-export const Small = {
-  ...Primary,
-  args: {
-    ...Primary.args,
-    size: 'small'
+    label: '보조 버튼'
   }
 };
 
 export const Large = {
-  ...Primary,
-  args: {
-    ...Primary.args,
+  render: (args) => new Button({
+    ...args,
     size: 'large'
+  }),
+  args: {
+    size: 'large',
+    label: '큰 버튼'
+  }
+};
+
+export const Small = {
+  render: (args) => new Button({
+    ...args,
+    size: 'small'
+  }),
+  args: {
+    size: 'small',
+    label: '작은 버튼'
   }
 }; 

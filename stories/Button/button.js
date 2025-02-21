@@ -1,7 +1,26 @@
 export class Button {
-  constructor(element) {
-    this.button = element;
-    this.init();
+  constructor(options = {}) {
+    const {
+      primary = false,
+      size = 'medium',
+      backgroundColor,
+      label = 'Button',
+      onClick = () => {}
+    } = options;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.innerText = label;
+    button.addEventListener('click', onClick);
+
+    const mode = primary ? 'button--primary' : 'button--secondary';
+    button.className = ['button', `button--${size}`, mode].join(' ');
+
+    if (backgroundColor) {
+      button.style.backgroundColor = backgroundColor;
+    }
+
+    return button;
   }
 
   init() {
