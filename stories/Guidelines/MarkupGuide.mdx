@@ -1,0 +1,138 @@
+import { Meta, Typeset, ColorPalette, ColorItem } from '@storybook/blocks';
+
+<Meta title="Guidelines/Markup Guide" />
+
+# 마크업 가이드
+
+이 문서는 프로젝트의 HTML 마크업 및 CSS 클래스 네이밍 규칙을 정의합니다.
+
+## 클래스 네이밍 기법
+
+본 프로젝트는 **BEM(Block, Element, Modifier)** 방법론을 따릅니다.
+
+### BEM 구조
+css
+.block {} / 블록: 독립적인 컴포넌트 /
+
+.blockelement {} / 요소: 블록의 일부분 /
+
+.block--modifier {} / 수정자: 블록의 변형 /
+
+.blockelement--modifier {} / 요소의 변형 /
+
+
+### 예시
+
+```
+<div class="accordion">
+	<div class="accordionitem">
+		<button class="accordionheader accordion_header--active">
+			<span class="accordiontitle">제목</span>
+			<span class="accordionicon">+</span>
+		</button>
+		<div class="accordionpanel">
+			<div class="accordioncontent">내용</div>
+		</div>
+	</div>
+</div>
+```
+
+## 접두사 규칙
+
+특별한 목적을 가진 클래스에는 다음과 같은 접두사를 사용합니다:
+
+```| 접두사 | 의미 | 예시 |
+|--------|------|------|
+| `js-` | JavaScript 훅 | `js-toggle`, `js-dropdown` |
+| `is-`, `has-` | 상태 표시 | `is-active`, `has-error` |
+| `u-` | 유틸리티 | `u-hidden`, `u-flex` |
+| `t-` | 테마 | `t-dark`, `t-light` |
+```
+## HTML 마크업 가이드라인
+
+### 시맨틱 태그 사용
+```
+<!-- 권장 -->
+<header class="header">
+<nav class="navigation">
+<ul class="navigationlist">
+<li class="navigationitem"><a href="#" class="navigation_link">홈</a></li>
+</ul>
+</nav>
+</header>
+<!-- 지양 -->
+<div class="header">
+<div class="navigation">
+<div class="navigationlist">
+<div class="navigationitem"><a href="#" class="navigation_link">홈</a></div>
+</div>
+</div>
+</div>
+```
+
+### 접근성 속성
+
+모든 인터랙티브 요소에는 적절한 ARIA 속성을 추가합니다:
+```
+<button class="accordionheader" aria-expanded="false" aria-controls="panel-1">
+제목
+</button>
+<div id="panel-1" class="accordionpanel" hidden>
+내용
+</div>
+```
+
+## CSS 작성 가이드라인
+
+### 속성 순서
+
+CSS 속성은 다음 순서로 작성합니다:
+
+1. 레이아웃 속성 (display, position, float 등)
+2. 박스 모델 속성 (width, height, margin, padding 등)
+3. 시각적 속성 (background, color, font 등)
+4. 기타 속성 (cursor, transition 등)
+
+```
+.button {
+/ 레이아웃 /
+display: inline-block;
+position: relative;
+/ 박스 모델 /
+width: 200px;
+height: 40px;
+margin: 10px;
+padding: 8px 16px;
+/ 시각적 속성 /
+background-color: #4A90E2;
+color: white;
+font-size: 14px;
+text-align: center;
+/ 기타 /
+cursor: pointer;
+transition: all 0.3s ease;
+}
+```
+
+## 반응형 디자인
+
+미디어 쿼리는 모바일 퍼스트 접근 방식을 사용합니다:
+
+```
+/ 모바일 기본 스타일 /
+.container {
+width: 100%;
+}
+/ 태블릿 (768px 이상) /
+@media (min-width: 768px) {
+.container {
+width: 750px;
+}
+}
+/ 데스크톱 (1024px 이상) /
+@media (min-width: 1024px) {
+.container {
+width: 970px;
+}
+}
+```

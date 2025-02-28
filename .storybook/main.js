@@ -1,20 +1,20 @@
 /** @type { import('@storybook/html-vite').StorybookConfig } */
-export default {
-  stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+module.exports = {
+  stories: [
+    "../stories/**/*.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)"
+  ],
   addons: [
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-actions',
-    '@storybook/addon-viewport',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-measure',
-    '@storybook/addon-outline'
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/addon-a11y"
   ],
   framework: {
-    name: '@storybook/html-vite',
+    name: "@storybook/html-vite",
     options: {}
   },
   docs: {
-    autodocs: true
+    autodocs: "tag"
   }
 };

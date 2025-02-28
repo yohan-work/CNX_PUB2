@@ -7,7 +7,7 @@ const myTheme = create({
   
   // 브랜드
   brandTitle: '접근성 컴포넌트 라이브러리',
-  brandUrl: 'https://github.com/your-username/your-repository',
+  brandUrl: 'https://github.com/yohan-work/CNX_PUB2',
   brandImage: '/cnxc_logo.svg',
   brandTarget: '_self',
   
