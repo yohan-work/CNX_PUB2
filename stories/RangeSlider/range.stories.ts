@@ -71,13 +71,13 @@ export const Default = {
   
  const range = new RangeSlider(getEle,{
     // extensionUnit : '%',
-    showValue : true,
+    // showValue : true,
     step : 5,
-    toolTip : {
-      direction : 'top',
-      mode : 'active', // hover, active
-      effect : true
-    },
+    // toolTip : {
+    //   direction : 'top',
+    //   mode : 'active', // hover, active
+    //   effect : true
+    // },
     leftProps : {
       id : "#input-left",
       // disabled : true,
