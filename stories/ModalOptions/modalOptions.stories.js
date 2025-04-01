@@ -4,6 +4,11 @@ import modalOptionsCss from './modalOptions.css?raw';
 import modalOptionsJs from './modalOptions.js?raw';
 import './modalOptions.css';
 
+/**
+ * 스토리북 설정
+ * 스토리북 타이틀, 태그, 파라미터, 아규먼트 설정
+ * 스토리북 파라미터 설정
+ */
 export default {
   title: 'Components/ModalOptions',
   tags: ['autodocs'],
@@ -28,6 +33,10 @@ export default {
         `
       }
     },
+    /**
+     * 스토리북 파라미터 설정
+     * 파라미터 설정(모달 크기, 헤더, 푸터)
+     */
     argTypes: {
       size: {
         control: 'select',
@@ -90,9 +99,18 @@ export default {
   }
 };
 
-// 모든 스토리에 공통으로 사용할 함수
+/**
+ * 모든 스토리에 공통으로 사용할 함수
+ * 모달 구조 생성
+ * 모달 이벤트 핸들러 추가
+ * 모달 컨테이너 반환
+ */
 const createModal = (args) => {
-  // 기본 모달 구조
+  /**
+   * 모달 구조 생성
+   * 모달 설정(크기, 열기버튼, 닫기버튼, 헤더, 바디, 푸터)
+   * 모달 컨테이너 생성
+   */
   let html = `
     <div>
       <button class="modal-trigger">모달 열기</button>
@@ -101,7 +119,11 @@ const createModal = (args) => {
         <div class="modal-content">
   `;
   
-  // 헤더 추가 (show가 true인 경우만)
+  /**
+   * 헤더 추가 (show가 true인 경우만)
+   * 모달 헤더 타이틀 추가
+   * 닫기 버튼 추가
+   */
   if (args.header && args.header.show) {
     html += `
           <div class="modal-header">
@@ -110,15 +132,21 @@ const createModal = (args) => {
           </div>
     `;
   }
-  
-  // 바디 추가 (항상)
-  html += `
-          <div class="modal-body">
+
+  /**
+   * 바디 추가 (항상)
+   * 바디 요소 생성
+   * 바디 요소 텍스트 추가
+   */
+    html += `
+        <div class="modal-body">
             <p>${args.body}</p>
-          </div>
-  `;
+        </div>
+    `;
   
-  // 푸터 추가 (show가 true인 경우만)
+  /**
+   * 푸터 추가 (show가 true인 경우만)
+   */
   if (args.footer && args.footer.show) {
     const buttonHTML = args.footer.buttons.map(btn => {
       const btnClass = btn.variant ? `modal-${btn.action} modal-btn-${btn.variant}` : `modal-${btn.action}`;
@@ -126,39 +154,52 @@ const createModal = (args) => {
     }).join('');
     
     html += `
-          <div class="modal-footer">
+        <div class="modal-footer">
             ${buttonHTML}
-          </div>
+        </div>
     `;
   }
   
-  // HTML 닫기
+  /**
+   * 모달 컨테이너 닫기
+   */
   html += `
         </div>
       </div>
     </div>
   `;
   
-  // 컨테이너 생성 및 HTML 설정
+  /**
+   * 컨테이너 생성 및 HTML 설정d
+   */
   const container = document.createElement('div');
   container.innerHTML = html;
   
-  // 이벤트 핸들러 추가
+  /**
+   * 이벤트 핸들러 추가
+   * 모달 열기 버튼 이벤트 핸들러 추가(열기, 닫기, 액션버튼)
+   */
   const trigger = container.querySelector('.modal-trigger');
   const modal = container.querySelector('.modal');
   const closeBtn = container.querySelector('.modal-close');
   const overlay = container.querySelector('.modal-overlay');
   const actionBtns = container.querySelectorAll('[data-action]');
   
-  // 모달 열기
+  /**
+   * 모달 열기 버튼 이벤트 핸들러 추가
+   */
   trigger.addEventListener('click', () => modal.hidden = false);
   
-  // 닫기 버튼
+  /**
+   * 닫기 버튼 이벤트 핸들러 추가
+   */
   if (closeBtn) {
     closeBtn.addEventListener('click', () => modal.hidden = true);
   }
   
-  // 액션 버튼들
+  /**
+   * 액션 버튼 이벤트 핸들러 추가
+   */
   actionBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       console.log(`Button clicked: ${btn.dataset.action}`);
@@ -166,13 +207,20 @@ const createModal = (args) => {
     });
   });
   
-  // 오버레이 클릭
+  /**
+   * 오버레이 클릭
+   */
   overlay.addEventListener('click', () => modal.hidden = true);
   
   return container;
 };
 
-// 기본 모달 (헤더와 푸터 없음)
+/**
+ * 기본 모달 (헤더와 푸터 없음)
+ * 이벤트 핸들러 추가(열기, 닫기, 액션)
+ * 오버레이 클릭 이벤트 핸들러 추가
+ * 컨테이너 반환
+ */
 export const Basic = {
   render: (args) => createModal(args),
   args: {
@@ -180,7 +228,12 @@ export const Basic = {
   }
 };
 
-// 헤더가 있는 모달
+/**
+ * 헤더가 있는 모달
+ * 이벤트 핸들러 추가(열기, 닫기, 액션)
+ * 오버레이 클릭 이벤트 핸들러 추가
+ * 컨테이너 반환
+ */
 export const Header = {
   render: (args) => createModal(args),
   args: {
@@ -193,7 +246,12 @@ export const Header = {
   }
 };
 
-// 푸터가 있는 모달
+/**
+ * 푸터가 있는 모달
+ * 이벤트 핸들러 추가(열기, 닫기, 액션)
+ * 오버레이 클릭 이벤트 핸들러 추가
+ * 컨테이너 반환
+ */
 export const Footer = {
   render: (args) => createModal(args),
   args: {
@@ -208,7 +266,12 @@ export const Footer = {
   }
 };
 
-// 헤더와 푸터가 모두 있는 모달
+/**
+ * 헤더와 푸터가 모두 있는 모달
+ * 이벤트 핸들러 추가(열기, 닫기, 액션)
+ * 오버레이 클릭 이벤트 핸들러 추가
+ * 컨테이너 반환
+ */
 export const Complete = {
   render: (args) => createModal(args),
   args: {

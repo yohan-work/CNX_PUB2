@@ -23,10 +23,10 @@ export class ModalBuilder {
     return this;
   }
   
-  setBody(bodyText) {
+  setBody(bodyOptions) {
     const bodyElement = document.createElement('div');
     bodyElement.className = 'modal-body';
-    bodyElement.innerHTML = `<p>${bodyText}</p>`;
+    bodyElement.innerHTML = `<p>${bodyOptions}</p>`;
     this.modalContent.appendChild(bodyElement);
     return this;
   }
@@ -35,11 +35,11 @@ export class ModalBuilder {
     const buttonHTML = footerOptions.buttons.map(btn => {
         const btnClass = btn.variant ? `modal-${btn.action} modal-btn-${btn.variant}` : `modal-${btn.action}`;
         return `<button class="${btnClass}" data-action="${btn.action}">${btn.text}</button>`;
-      }).join('');
+    }).join('');
       
     this.modalContent.insertAdjacentHTML('beforeend', `
         <div class="modal-footer">
-          ${buttonHTML}
+            ${buttonHTML}
         </div>
     `);
 
