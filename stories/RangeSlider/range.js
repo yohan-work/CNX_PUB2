@@ -7,7 +7,6 @@ class RangeSlider {
     this.step = step, // 단위
     this.leftProps = {
       id : leftProps.id,
-      handleBar : leftProps.handleBar, // 드래그 엘리먼트
       disabled : leftProps.disabled, // 사용성 유무
       values : {
         min : leftProps.values.min, // 최소값
@@ -17,7 +16,6 @@ class RangeSlider {
     };
     this.rightProps = {
       id : rightProps.id,
-      handleBar : rightProps.handleBar, // 드래그 엘리먼트
       disabled : rightProps.disabled, // 사용성 유무
       values : {
         min : rightProps.values.min, // 최소값
