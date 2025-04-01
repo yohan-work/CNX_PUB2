@@ -25,5 +25,8 @@
     "@storybook/test": "^8.5.8",
     "storybook": "^8.5.8",
     "vite": "^6.1.1"
+  },
+  "dependencies": {
+    "swiper": "^11.2.5"
   }
 }
