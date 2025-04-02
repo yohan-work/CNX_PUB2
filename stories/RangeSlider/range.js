@@ -28,6 +28,10 @@ class RangeSlider {
   }
 
 
+
+
+
+  
   init() {
     /* 선언 */
     const rootElement = this.rootElement;

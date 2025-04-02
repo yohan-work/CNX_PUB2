@@ -3,6 +3,8 @@ type extensionUnitProps = string;
 type showValueProps = boolean;
 type stepProps = number;
 
+
+
 type calcProps = {
     value : number;
     min : number;
@@ -14,6 +16,9 @@ type inputRangeProps = {
     max : number;
     currentValue : number;
 }
+
+
+
 
 type childProps = {
     id : string;
