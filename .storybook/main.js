@@ -14,6 +14,13 @@ module.exports = {
     name: "@storybook/html-vite",
     options: {}
   },
+  viteFinal: (config) => {
+    config.optimizeDeps = config.optimizeDeps || {};
+    config.optimizeDeps.exclude = [
+      'swiper/element/bundle',
+    ];
+    return config;
+  },
   docs: {
     autodocs: "tag"
   }
