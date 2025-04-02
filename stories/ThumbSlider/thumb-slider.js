@@ -1,4 +1,4 @@
-import { register } from 'Swiper/element/bundle';
+import { register } from 'swiper/element/bundle';
 register();
 
 
