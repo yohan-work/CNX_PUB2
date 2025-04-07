@@ -21,9 +21,21 @@
     flex-direction:column-reverse;
   }
   &.thumb-left {
-    flex-direction:row;
+    flex-direction:row-reverse;
+    swiper-container {
+      width:80%;
+      &:nth-child(2) {
+        width:20%;
+      }
+    }
   }
   &.thumb-right {
-    flex-direction:row-reverse;
+    flex-direction:row;
+    swiper-container {
+      width:80%;
+      &:nth-child(2) {
+        width:20%;
+      }
+    }
   }
 }
