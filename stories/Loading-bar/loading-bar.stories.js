@@ -5,7 +5,64 @@ import loadingBarLinear from './loading-bar-linear.html?raw';
 import loadingBarWave from './loading-bar-wave.html?raw';
 import loadingBarPulse from './loading-bar-pulse.html?raw';
 import loadingBarCss from './loading-bar.css?raw';
+import spinnerCss from './loading-bar-spinner.css?raw';
+import dotCss from './loading-bar-dot.css?raw';
+import linearCss from './loading-bar-linear.css?raw';
+import waveCss from './loading-bar-wave.css?raw';
+import pulseCss from './loading-bar-pulse.css?raw';
 import './loading-bar.css';
+import './loading-bar-spinner.css';
+import './loading-bar-dot.css';
+import './loading-bar-linear.css';
+import './loading-bar-wave.css';
+import './loading-bar-pulse.css';
+
+// 다크모드 토글 함수
+const toggleDarkMode = (isDark) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    
+    // 다크모드 미디어 쿼리 시뮬레이션을 위한 스타일 요소 추가
+    let darkModeStyle = document.getElementById('dark-mode-simulation');
+    if (!darkModeStyle) {
+      darkModeStyle = document.createElement('style');
+      darkModeStyle.id = 'dark-mode-simulation';
+      document.head.appendChild(darkModeStyle);
+    }
+    
+    // 다크모드 미디어 쿼리 시뮬레이션
+    darkModeStyle.textContent = isDark 
+      ? '@media (prefers-color-scheme: dark) { :root { color-scheme: dark; } }' 
+      : '';
+  }
+};
+
+// 공통 argTypes 정의
+const commonArgTypes = {
+  backgroundColor: {
+    control: { type: 'color' },
+    description: '로딩바 배경색',
+    defaultValue: 'rgba(255, 255, 255, 0.9)',
+    table: {
+      category: '스타일'
+    }
+  },
+  elementColor: {
+    control: { type: 'color' },
+    description: '로딩 요소의 색상',
+    table: {
+      category: '스타일'
+    }
+  },
+  animationSpeed: {
+    control: { type: 'range', min: 0.1, max: 3, step: 0.1 },
+    description: '애니메이션 속도 (1 = 기본 속도)',
+    defaultValue: 1,
+    table: {
+      category: '애니메이션'
+    }
+  }
+};
 
 //Docs 설정영역
 export default {
@@ -28,14 +85,32 @@ export default {
 
 // 스토리 정의
 export const CircleSpinner = {
-  render: () => {
+  render: (args) => {
+    // 다크모드 토글 적용
+    toggleDarkMode(args.darkMode);
+    
     const container = document.createElement('div');
     container.innerHTML = loadingBarSpinner;
     
     const loadingBarElement = container;
-    new LoadingBar(loadingBarElement);
+    new LoadingBar(loadingBarElement, {
+      backgroundColor: args.backgroundColor,
+      elementColor: args.elementColor,
+      animationSpeed: args.animationSpeed
+    });
     
     return container;
+  },
+  argTypes: {
+    ...commonArgTypes,
+    elementColor: {
+      control: { type: 'color' },
+      description: '스피너 테두리 색상',
+      defaultValue: '#3498db',
+      table: {
+        category: '스타일'
+      }
+    }
   },
   parameters: {
     docs: {
@@ -50,7 +125,7 @@ export const CircleSpinner = {
           // HTML
           ${loadingBarSpinner}
           // CSS
-          ${loadingBarCss}
+          ${spinnerCss}
         `
       }
     }
@@ -58,14 +133,32 @@ export const CircleSpinner = {
 };
 
 export const DotLoading = {
-  render: () => {
+  render: (args) => {
+    // 다크모드 토글 적용
+    toggleDarkMode(args.darkMode);
+    
     const container = document.createElement('div');
     container.innerHTML = loadingBarDot;
     
     const loadingBarElement = container;
-    new LoadingBar(loadingBarElement);
+    new LoadingBar(loadingBarElement, {
+      backgroundColor: args.backgroundColor,
+      elementColor: args.elementColor,
+      animationSpeed: args.animationSpeed
+    });
     
     return container;
+  },
+  argTypes: {
+    ...commonArgTypes,
+    elementColor: {
+      control: { type: 'color' },
+      description: '점 색상',
+      defaultValue: '#1a1a1a',
+      table: {
+        category: '스타일'
+      }
+    }
   },
   parameters: {
     docs: {
@@ -81,7 +174,7 @@ export const DotLoading = {
           ${loadingBarDot}
 
           // CSS
-          ${loadingBarCss}
+          ${dotCss}
         `
       }
     }
@@ -89,15 +182,33 @@ export const DotLoading = {
 };
 
 export const LinearProgress = {
-  render: () => {
+  render: (args) => {
+    // 다크모드 토글 적용
+    toggleDarkMode(args.darkMode);
+    
     const container = document.createElement('div');
     container.className = 'view-test';
     container.innerHTML = loadingBarLinear;
     
     const loadingBarElement = container;
-    new LoadingBar(loadingBarElement);
+    new LoadingBar(loadingBarElement, {
+      backgroundColor: args.backgroundColor,
+      elementColor: args.elementColor,
+      animationSpeed: args.animationSpeed
+    });
     
     return container;
+  },
+  argTypes: {
+    ...commonArgTypes,
+    elementColor: {
+      control: { type: 'color' },
+      description: '프로그레스 바 색상',
+      defaultValue: '#0d47a1',
+      table: {
+        category: '스타일'
+      }
+    }
   },
   parameters: {
     docs: {
@@ -111,6 +222,8 @@ export const LinearProgress = {
         code: `
           // HTML
           ${loadingBarLinear}
+          // CSS
+          ${linearCss}
         `
       }
     }
@@ -118,14 +231,32 @@ export const LinearProgress = {
 };
 
 export const WaveLoading = {
-  render: () => {
+  render: (args) => {
+    // 다크모드 토글 적용
+    toggleDarkMode(args.darkMode);
+    
     const container = document.createElement('div');
     container.innerHTML = loadingBarWave;
     
     const loadingBarElement = container;
-    new LoadingBar(loadingBarElement);
+    new LoadingBar(loadingBarElement, {
+      backgroundColor: args.backgroundColor,
+      elementColor: args.elementColor,
+      animationSpeed: args.animationSpeed
+    });
     
     return container;
+  },
+  argTypes: {
+    ...commonArgTypes,
+    elementColor: {
+      control: { type: 'color' },
+      description: '파도 막대 색상',
+      defaultValue: '#2a2a8f',
+      table: {
+        category: '스타일'
+      }
+    }
   },
   parameters: {
     docs: {
@@ -139,6 +270,8 @@ export const WaveLoading = {
         code: `
           // HTML
           ${loadingBarWave}
+          // CSS
+          ${waveCss}
         `
       }
     }
@@ -146,14 +279,32 @@ export const WaveLoading = {
 };
 
 export const PulseLoading = {
-  render: () => {
+  render: (args) => {
+    // 다크모드 토글 적용
+    toggleDarkMode(args.darkMode);
+    
     const container = document.createElement('div');
     container.innerHTML = loadingBarPulse;
     
     const loadingBarElement = container;
-    new LoadingBar(loadingBarElement);
+    new LoadingBar(loadingBarElement, {
+      backgroundColor: args.backgroundColor,
+      elementColor: args.elementColor,
+      animationSpeed: args.animationSpeed
+    });
     
     return container;
+  },
+  argTypes: {
+    ...commonArgTypes,
+    elementColor: {
+      control: { type: 'color' },
+      description: '펄스 원 색상',
+      defaultValue: '#9c27b0',
+      table: {
+        category: '스타일'
+      }
+    }
   },
   parameters: {
     docs: {
@@ -167,6 +318,8 @@ export const PulseLoading = {
         code: `
           // HTML
           ${loadingBarPulse}
+          // CSS
+          ${pulseCss}
         `
       }
     }
