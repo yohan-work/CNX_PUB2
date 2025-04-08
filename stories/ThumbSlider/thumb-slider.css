@@ -6,6 +6,12 @@
   flex-direction:column;
   swiper-container {
     width:100%;
+    height:fit-content;
+    img {
+      width:100%;
+      height:100%;
+      object-fit: cover;
+    }
     &:nth-child(2) {
       swiper-slide {
         cursor: pointer;
@@ -22,6 +28,7 @@
   }
   &.thumb-left {
     flex-direction:row-reverse;
+    gap:5px;
     swiper-container {
       width:80%;
       &:nth-child(2) {
@@ -31,6 +38,7 @@
   }
   &.thumb-right {
     flex-direction:row;
+    gap:5px;
     swiper-container {
       width:80%;
       &:nth-child(2) {
