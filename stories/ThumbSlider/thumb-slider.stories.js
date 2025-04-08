@@ -28,8 +28,12 @@ ${thumbsliderJs}
   },
   argTypes: {
     thumbSlideShow: {
-      control: 'number',
-      description: '썸네일 슬라이더에 표시될 슬라이드 개수 (최대값이 메인 슬라이더의 슬라이드 개수)',
+      control: { 
+        type: 'number',
+        min: 1,
+        max: 5
+      },
+      description: '썸네일 슬라이더에 표시될 슬라이드 개수',
       defaultValue: 4
     },
     thumbSlidePosition: {
@@ -40,7 +44,7 @@ ${thumbsliderJs}
     },
     thumbSwiper: {
       control: 'text',
-      description: '썸네일 슬라이더의 클래스명',
+      description: '썸네일 슬라이더의 클래스명(.을 포함하여 작성)',
       defaultValue: '.thumbswiper_thumbswiper'
     }
   }
@@ -52,49 +56,20 @@ export const Default = {
     container.innerHTML = thumbsliderHtml;
     
     const sliderElement = container.querySelector('.thumbswiper');
-    const mainSliderContainer = sliderElement.querySelector('.thumbswiper_mainswiper');
-    
-    // 메인 슬라이더의 슬라이드 개수 확인
-    const mainSlideCount = mainSliderContainer.querySelectorAll('swiper-slide').length;
-    
-    // thumbSlideShow 값이 메인 슬라이더 개수를 초과하지 않도록 조정
-    const adjustedThumbSlideShow = Math.min(args.thumbSlideShow, mainSlideCount);
-    
+        
     // 이전 ThumbSlider 인스턴스 정리
     if (sliderElement._thumbSlider) {
       sliderElement._thumbSlider = null;
     }
     
     // args 값을 속성으로 설정
-    sliderElement.setAttribute('thumb-slide-show', adjustedThumbSlideShow);
+    sliderElement.setAttribute('thumb-slide-show', args.thumbSlideShow);
     sliderElement.setAttribute('thumb-slide-position', args.thumbSlidePosition);
     sliderElement.querySelector('.thumbswiper_mainswiper').setAttribute('thumbs-swiper', args.thumbSwiper);
     
     // 새로운 ThumbSlider 인스턴스 생성
     const thumbSlider = new ThumbSlider(sliderElement);
     sliderElement._thumbSlider = thumbSlider;
-    
-    // args 변경 시 높이 업데이트를 위한 MutationObserver
-    const observer = new MutationObserver(() => {
-      if (args.thumbSlidePosition === 'left' || args.thumbSlidePosition === 'right') {
-        const mainSliderContainer = sliderElement.querySelector('.thumbswiper_mainswiper');
-        const thumbSliderContainer = sliderElement.querySelector('.thumbswiper_thumbswiper');
-        if (mainSliderContainer && thumbSliderContainer) {
-          const mainSliderHeight = mainSliderContainer.offsetHeight;
-          if (mainSliderHeight > 0) {
-            thumbSliderContainer.style.height = `${mainSliderHeight}px`;
-            if (thumbSliderContainer.swiper) {
-              thumbSliderContainer.swiper.update();
-            }
-          }
-        }
-      }
-    });
-    
-    observer.observe(sliderElement, {
-      attributes: true,
-      attributeFilter: ['thumb-slide-position', 'thumb-slide-show']
-    });
     
     return container;
   },

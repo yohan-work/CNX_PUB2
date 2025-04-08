@@ -40,26 +40,26 @@ export class ThumbSlider {
 
     //옵션제어 : 썸네일 슬라이더 위치 설정
     let thumbSlidePosition = this.element.getAttribute('thumb-slide-position');
-    //예외처리 : 썸네일 슬라이더 위치가 없으면 메인 슬라이더 위치로 설정
+    //예외처리 : 썸네일 슬라이더 위치가 없으면 bottom이 기본값
     if (!thumbSlidePosition) {
       thumbSlidePosition = 'bottom';
     }
     this.element.classList.add('thumb-'+thumbSlidePosition);
     
-    //썸네일 슬라이더 방향 설정
+    //left, right일 경우 세로방향 스와이퍼로 변경
     if (thumbSlidePosition === 'left' || thumbSlidePosition === 'right') {
       thumbSliderContainer.setAttribute('direction', 'vertical');
       
-      // 높이 업데이트 함수
+      // thumbSlide의 Height 갱신신
       const updateHeight = () => {
-        const mainSliderHeight = mainSliderContainer.offsetHeight;
+        const mainSliderHeight = mainSliderContainer.offsetHeight; // 갱신시점의 mainSlider의 height 받아오기기
         if (mainSliderHeight > 0) {
           thumbSliderContainer.style.height = `${mainSliderHeight}px`;
           thumbSliderContainer.swiper.update(); // 썸네일 슬라이더 새로고침
         }
       };
 
-      // MutationObserver를 사용하여 높이 변화 감지
+      // MutationObserver를 사용하여 mainSliderContainer 높이 변화 감지
       const observer = new MutationObserver(updateHeight);
       
       // 옵저버 설정
