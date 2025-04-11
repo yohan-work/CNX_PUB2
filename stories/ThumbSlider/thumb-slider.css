@@ -4,6 +4,7 @@
   margin:0 auto;
   display:flex;
   flex-direction:column;
+  position: relative;
   swiper-container {
     width:100%;
     height:fit-content;

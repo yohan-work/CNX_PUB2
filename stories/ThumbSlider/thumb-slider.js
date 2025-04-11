@@ -46,11 +46,20 @@ export class ThumbSlider {
     }
     this.element.classList.add('thumb-'+thumbSlidePosition);
     
+    //옵션제어 : 네비게이션 설정
+    let navigationOption = this.element.getAttribute('thumb-navigation') || 'none';
+    if (navigationOption === 'main' || navigationOption === 'all') {
+      mainSliderContainer.setAttribute('navigation', 'true');
+    }
+    if (navigationOption === 'thumb' || navigationOption === 'all') {
+      thumbSliderContainer.setAttribute('navigation', 'true');
+    }
+    
     //left, right일 경우 세로방향 스와이퍼로 변경
     if (thumbSlidePosition === 'left' || thumbSlidePosition === 'right') {
       thumbSliderContainer.setAttribute('direction', 'vertical');
       
-      // thumbSlide의 Height 갱신신
+      // thumbSlide의 Height 갱신
       const updateHeight = () => {
         const mainSliderHeight = mainSliderContainer.offsetHeight; // 갱신시점의 mainSlider의 height 받아오기기
         if (mainSliderHeight > 0) {
