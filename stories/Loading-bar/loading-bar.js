@@ -120,7 +120,12 @@ export class LoadingBar {
   applyOptions() {
     // 배경색 적용
     if (this.options.backgroundColor) {
-      this.container.style.backgroundColor = this.options.backgroundColor;
+      const loadingContainer = this.container.querySelector('.loading-container');
+      if (loadingContainer) {
+        loadingContainer.style.backgroundColor = this.options.backgroundColor;
+      } else {
+        this.container.style.backgroundColor = this.options.backgroundColor;
+      }
     }
     
     // 요소 색상 적용
