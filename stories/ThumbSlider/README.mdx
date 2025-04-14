@@ -43,21 +43,41 @@ new ThumbSlider(sliderElement);
 <table>
   <tr>
     <th>옵션</th>
-    <th>값</th>
-    <th>기본값</th>
+    <th>타입</th>
+    <th>옵션값</th>
     <th>설명</th>
   </tr>
   <tr>
     <td>`thumb-slide-show`</td>
     <td>`number`</td>
-    <td>`.thumbswiper_mainswiper`의 `swiper-slide`갯수</td>
+    <td>`.thumbswiper_mainswiper`의 `swiper-slide`갯수 `(default)`</td>
     <td>썸네일 슬라이더에 한 번에 표시될 슬라이드의 개수를 설정합니다.</td>
   </tr>
   <tr>
     <td>`thumb-slide-position`</td>
-    <td>`string`<br/> `top`,`bottom`,`left`,`right`</td>
-    <td>`bottom`</td>
+    <td>
+    `string`
+    </td>
+    <td>
+    `top`: thumb slide가 상단에 위치<br/>
+    `bottom (default)`: thumb slide가 하단에 위치<br/>
+    `left`: thumb slide가 왼쪽에 위치<br/>
+    `right`: thumb slide가 오른쪽에 위치<br/>
+    </td>
     <td>썸네일 슬라이더의 위치를 설정합니다.</td>
+  </tr>
+  <tr>
+    <td>`thumb-navigation`</td>
+    <td>
+    `string`
+    </td>
+    <td>
+    `none (default)`: 네비게이션 버튼 없음<br/>
+    `main`: 메인 슬라이더에만 네비게이션 버튼 표시<br/>
+    `thumb`: 썸네일 슬라이더에만 네비게이션 버튼 표시<br/>
+    `all`: 메인 슬라이더와 썸네일 슬라이더 모두에 네비게이션 버튼 표시
+    </td>
+    <td>네비게이션 버튼 표시 옵션을 설정합니다.</td>
   </tr>
 </table>
 
@@ -66,14 +86,14 @@ new ThumbSlider(sliderElement);
 <table>
   <tr>
     <th>옵션</th>
-    <th>값</th>
-    <th>기본값</th>
+    <th>타입입</th>
+    <th>옵션값값</th>
     <th>설명</th>
   </tr>
   <tr>
     <td>`thumb-swiper`</td>
     <td>`string`</td>
-    <td>`.thumbswiper_thumbswiper`</td>
+    <td>`.thumbswiper_thumbswiper (default)`</td>
     <td>자동 생성될 썸네일 슬라이더의 클래스명을 지정합니다.<br/>해당 옵션은 swiper에서 제공하는 thumbSlide와의 연결을 위한 옵션으로 사용됩니다.</td>
   </tr>
 </table>
@@ -96,7 +116,7 @@ new ThumbSlider(sliderElement);
 <div class="thumbswiper" 
      thumb-slide-show="6" 
      thumb-slide-position="left" 
-     thumb-swiper=".custom-thumb-swiper">
+     thumb-navigation="all">
   <swiper-container class="thumbswiper_mainswiper" thumbs-swiper=".custom-thumb-swiper">
     <!-- 슬라이드 내용 -->
   </swiper-container>
@@ -108,10 +128,3 @@ new ThumbSlider(sliderElement);
 1. Swiper.js가 필요하므로 반드시 설치해야 합니다.
 2. 썸네일 슬라이더는 메인 슬라이더의 내용을 자동으로 복사하여 생성됩니다.
 3. `thumb-slide-position`이 `left` 또는 `right`인 경우, 썸네일 슬라이더의 높이가 메인 슬라이더의 높이에 맞춰 자동으로 조정됩니다.
-
-## 브라우저 지원
-
-- Chrome (최신 버전)
-- Firefox (최신 버전)
-- Safari (최신 버전)
-- Edge (최신 버전)
