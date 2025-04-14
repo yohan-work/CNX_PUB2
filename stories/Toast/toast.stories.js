@@ -12,18 +12,18 @@ export default {
       },
       source: {
         code: `
-// HTML
-${toastHtml}
+          // HTML
+          ${toastHtml}
 
-// CSS
-${toastCss}
+          // CSS
+          ${toastCss}
         `
       }
     }
   },
   argTypes: {
     type: {
-      control: { type: 'select', options: ['success', 'error'] },
+      control: { type: 'select', options: ['success', 'error', 'warning'] },
       description: '토스트 타입',
       defaultValue: 'success'
     },
@@ -45,30 +45,61 @@ ${toastCss}
 
 export const Success = {
   render: (args) => {
-    const container = document.createElement('div');
-    container.innerHTML = toastHtml;
+    // HTML 문자열로 직접 작업
+    const isError = args.type === 'error';
+    const isWarning = args.type === 'warning';
+    const title = args.title || (isError ? '오류' : (isWarning ? '경고' : '성공'));
+    const message = args.message || 
+      (isError ? '작업 중 오류가 발생했습니다.' : 
+       (isWarning ? '주의가 필요한 상황입니다.' : '작업이 성공적으로 완료되었습니다.'));
     
-    const toast = container.querySelector('.toast.success');
-    toast.querySelector('.toast-title').textContent = args.title || '성공';
-    toast.querySelector('.toast-message').textContent = args.message || '작업이 성공적으로 완료되었습니다.';
+    // HTML 템플릿 생성
+    const html = `
+      <div class="toast-container" role="alert" aria-live="polite">
+        <div class="toast ${args.type} toast-visible toast-animated">
+          <div class="toast-icon">${isError ? '!' : (isWarning ? '⚠' : '✓')}</div>
+          <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+          </div>
+          <button class="toast-close" aria-label="알림 닫기">×</button>
+        </div>
+      </div>
+    `;
+    
+    // HTML을 DOM으로 변환
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    container.className = 'toast-wrapper';
+    
+    // 클릭 이벤트와 자동 닫기 로직 추가
+    const toastElement = container.querySelector('.toast');
     
     // 자동 닫기
     setTimeout(() => {
-      toast.classList.add('hiding');
+      toastElement.classList.remove('toast-visible');
+      toastElement.classList.add('hiding');
       setTimeout(() => {
-        toast.hidden = true;
+        toastElement.hidden = true;
       }, 300);
     }, args.duration);
     
     // 닫기 버튼
-    toast.querySelector('.toast-close').addEventListener('click', () => {
-      toast.classList.add('hiding');
+    container.querySelector('.toast-close').addEventListener('click', () => {
+      toastElement.classList.remove('toast-visible');
+      toastElement.classList.add('hiding');
       setTimeout(() => {
-        toast.hidden = true;
+        toastElement.hidden = true;
       }, 300);
     });
     
     return container;
+  },
+  args: {
+    type: 'success',
+    title: '성공',
+    message: '작업이 성공적으로 완료되었습니다.',
+    duration: 3000
   }
 };
 
@@ -77,6 +108,17 @@ export const Error = {
   args: {
     type: 'error',
     title: '오류',
-    message: '작업 중 오류가 발생했습니다.'
+    message: '작업 중 오류가 발생했습니다.',
+    duration: 3000
+  }
+};
+
+export const Warning = {
+  ...Success,
+  args: {
+    type: 'warning',
+    title: '경고',
+    message: '주의가 필요한 상황입니다.',
+    duration: 3000
   }
 }; 

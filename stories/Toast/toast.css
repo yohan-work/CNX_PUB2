@@ -29,6 +29,10 @@
   border-left: 4px solid #F44336;
 }
 
+.toast.warning {
+  border-left: 4px solid #FF9800;
+}
+
 .toast-icon {
   width: 24px;
   height: 24px;
@@ -47,6 +51,11 @@
 .toast.error .toast-icon {
   background: #FFEBEE;
   color: #F44336;
+}
+
+.toast.warning .toast-icon {
+  background: #FFF3E0;
+  color: #FF9800;
 }
 
 .toast-content {
