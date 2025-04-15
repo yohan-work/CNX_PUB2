@@ -29,6 +29,7 @@
     "vite": "^6.1.1"
   },
   "dependencies": {
+    "gsap": "npm:@gsap/business@^3.12.7",
     "swiper": "^11.2.5"
   }
 }
