@@ -4,7 +4,12 @@
   position: relative;
   height: auto;
 }
-
+.test-img-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 /*-----------------------------------------------*/
 
 /* 공통 스타일 */
