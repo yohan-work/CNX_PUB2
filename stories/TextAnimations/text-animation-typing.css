@@ -1,0 +1,13 @@
+.typing-container {
+  width:100%;
+  height:500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.typing-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+}
