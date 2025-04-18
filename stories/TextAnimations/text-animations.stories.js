@@ -48,7 +48,7 @@ ${textAnimationJs}
     },
     Direction: {
       control: 'select',
-      options: ['start', 'end', 'center', 'edges'],
+      options: ['start', 'end', 'center', 'edges', 'random'],
       description: '애니메이션 방향',
       table: {
         defaultValue: { summary: 'start' },
