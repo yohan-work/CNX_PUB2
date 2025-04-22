@@ -1,0 +1,435 @@
+/* 기본 스타일 */
+:root {
+    --skeleton-bg-light: #e0e0e0;
+    --skeleton-bg-dark: #333;
+    --card-bg-light: #fff;
+    --card-bg-dark: #1e1e1e;
+    --animation-duration: var(--animation-duration); /* 애니메이션 속도 변수 추가 */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #fff;
+    transition: background-color 0.3s;
+}
+
+body.dark-theme {
+    background: #121212;
+    color: #fff;
+}
+
+.skeleton-section {
+    margin-bottom: 30px;
+}
+
+/* 기본 스켈레톤 스타일 */
+.skeleton {
+    background-color: var(--skeleton-bg-light);
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.dark-theme .skeleton {
+    background-color: var(--skeleton-bg-dark);
+}
+
+/* 스켈레톤 변형 */
+.text {
+    height: 20px;
+    width: 200px;
+}
+
+.circular {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.rectangular {
+    width: 200px;
+    height: 100px;
+}
+
+.rounded {
+    width: 200px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+/* 카드 스켈레톤 */
+.skeleton-card {
+    width: 345px;
+    padding: 16px;
+    background: var(--card-bg-light);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dark-theme .skeleton-card {
+    background: var(--card-bg-dark);
+}
+
+.skeleton-card .rectangular {
+    width: 100%;
+    height: 140px;
+}
+
+/* 프로필 스켈레톤 */
+.skeleton-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 300px;
+}
+
+.skeleton-profile-content {
+    flex: 1;
+}
+
+/* 미디어 스켈레톤 */
+.skeleton-media {
+    width: 100%;
+    max-width: 345px;
+    background: var(--card-bg-light);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
+                0px 1px 1px 0px rgba(0,0,0,0.14),
+                0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.dark-theme .skeleton-media {
+    background: var(--card-bg-dark);
+}
+
+/* 헤더 영역 */
+.skeleton-media-header {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+}
+
+.skeleton-media-avatar {
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.skeleton-media-avatar .circular {
+    width: 40px;
+    height: 40px;
+}
+
+.skeleton-media-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.skeleton-media-title {
+    height:20px;
+    font-size:16px;
+    margin:10px 0;
+}
+
+/* 이미지 영역 */
+.skeleton-media .rectangular {
+    width: 100%;
+    height: 190px;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* 본문 영역 */
+.skeleton-media-body {
+    padding: 16px;
+}
+
+.skeleton-media-body .text {
+    margin-bottom: 6px;
+}
+
+.skeleton-media-body .text:last-child {
+    margin-bottom: 0;
+}
+
+/* 다크 테마 */
+.dark-theme .skeleton-media {
+    background: var(--card-bg-dark);
+    box-shadow: 0px 2px 1px -1px rgba(255,255,255,0.2),
+                0px 1px 1px 0px rgba(255,255,255,0.14),
+                0px 1px 3px 0px rgba(255,255,255,0.12);
+}
+
+.toggle-button {
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+.real-data-container {
+    display: none;
+}
+.real-data-container .skeleton-media-avatar {
+    margin:10px 16px 10px 0;
+}
+.real-data-container h3 {
+    margin: 10px 0;
+    font-size:16px;
+}
+.real-data-container p {
+    margin: 10px 0;
+    font-size:14px;
+}
+.dark-theme .real-data-container * {
+    color: #fff;
+}
+
+/* 컨트롤 패널 */
+.controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dark-theme .controls {
+    background: #333;
+}
+
+.controls select {
+    margin: 5px;
+    padding: 5px;
+}
+
+/* Animation variants */
+.skeleton-pulse {
+    animation: skeleton-pulse var(--animation-duration) infinite;
+}
+
+.skeleton-wave {
+    background: linear-gradient(
+        90deg,
+        var(--skeleton-bg-light) 25%,
+        rgba(224, 224, 224, 0.5) 50%,
+        var(--skeleton-bg-light) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-wave var(--animation-duration) infinite linear;
+}
+
+.dark-theme .skeleton-wave {
+    background: linear-gradient(
+        90deg,
+        var(--skeleton-bg-dark) 25%,
+        rgba(51, 51, 51, 0.5) 50%,
+        var(--skeleton-bg-dark) 75%
+    );
+    background-size: 200% 100%;
+}
+
+.skeleton-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: skeleton-shine var(--animation-duration) infinite;
+}
+
+.skeleton-glow {
+    animation: skeleton-glow var(--animation-duration) infinite;
+}
+
+.skeleton-fade {
+    animation: skeleton-fade var(--animation-duration) infinite;
+}
+
+/* Keyframes */
+@keyframes skeleton-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes skeleton-wave {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes skeleton-shine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes skeleton-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@keyframes skeleton-fade {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Bounce 애니메이션 */
+.skeleton-bounce {
+    animation: skeleton-bounce var(--animation-duration) infinite ease-in-out;
+}
+
+@keyframes skeleton-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Rotate 애니메이션 */
+.skeleton-rotate {
+    animation: skeleton-rotate var(--animation-duration) infinite linear;
+}
+
+@keyframes skeleton-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Scale 애니메이션 */
+.skeleton-scale {
+    animation: skeleton-scale var(--animation-duration) infinite ease-in-out;
+}
+
+@keyframes skeleton-scale {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Gradient 애니메이션 */
+.skeleton-gradient {
+    background: linear-gradient(
+        90deg,
+        var(--skeleton-bg-light) 0%,
+        rgba(224, 224, 224, 0.8) 25%,
+        var(--skeleton-bg-light) 50%,
+        rgba(224, 224, 224, 0.8) 75%,
+        var(--skeleton-bg-light) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-gradient var(--animation-duration) infinite linear;
+}
+
+@keyframes skeleton-gradient {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Slide 애니메이션 */
+.skeleton-slide {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
+    animation: skeleton-slide var(--animation-duration) infinite;
+}
+
+@keyframes skeleton-slide {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Shimmer 애니메이션 */
+.skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.7),
+        transparent
+    );
+    animation: skeleton-shimmer var(--animation-duration) infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
