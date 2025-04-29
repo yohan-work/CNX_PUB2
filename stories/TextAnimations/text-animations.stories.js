@@ -1,8 +1,9 @@
-import { TextAnimation } from './text-animation-typing.js';
-import textAnimationHtml from './text-animation-typing.html?raw';
-import textAnimationCss from './text-animation-typing.css?raw';
-import textAnimationJs from './text-animation-typing.js?raw';
-import './text-animation-typing.css';
+import { TextAnimation as TypingAnimation } from './text-animation-typing.js';
+import { TextAnimation as FadeAnimation } from './text-animation-fade.js';
+import textAnimationHtml from './text-animation.html?raw';
+import textAnimationCss from './text-animation.css?raw';
+import textAnimationTypingJs from './text-animation-typing.js?raw';
+import './text-animation.css';
 
 export default {
   title: 'GSAP/TextAnimations',
@@ -21,13 +22,21 @@ ${textAnimationHtml}
 ${textAnimationCss}
 
 // JavaScript
-${textAnimationJs}
+${textAnimationTypingJs}
         `
       }
     }
   },
   argTypes: {
-    Text : {
+    Effect: {
+      control: 'radio',
+      options: ['typing', 'fade'],
+      description: '애니메이션 효과 선택',
+      table: {
+        defaultValue: { summary: 'typing' },
+      },
+    },
+    Text: {
       control: 'text',
       description: '텍스트 내용',
       table: {
@@ -54,20 +63,77 @@ ${textAnimationJs}
         defaultValue: { summary: 'start' },
       },
     },
-  }
+  },
 };
 
-export const Default = {
+export const AllEffects = {
   args: {
+    Effect: 'typing',
     Speed: 0.15,
-    Direction: 'start'
+    Direction: 'start',
   },
   render: (args) => {
     const container = document.createElement('div');
     container.innerHTML = textAnimationHtml;
     
-    const textAnimation = new TextAnimation(container, args.Text, args.Speed, args.Direction);
+    let textAnimation;
+    
+    if (args.Effect === 'typing') {
+      textAnimation = new TypingAnimation(container, args.Text, args.Speed, args.Direction);
+    } else if (args.Effect === 'fade') {
+      textAnimation = new FadeAnimation(container, args.Text, args.Speed, args.Direction);
+    }
+
+    
     return container;
-  }
+  },
 };
 
+export const Typing = {
+  args: {
+    Speed: 0.15,
+    Direction: 'start',   
+  },
+  argTypes: {
+    Effect: {
+      table: {
+        disable: true
+      }
+    }
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.innerHTML = textAnimationHtml;
+    
+    let textAnimation;  
+    
+    textAnimation = new TypingAnimation(container, args.Text, args.Speed, args.Direction);
+    
+    return container;
+  },
+};
+
+
+export const Fade = {
+  args: {
+    Speed: 0.15,
+    Direction: 'start',
+  },
+  argTypes: {
+    Effect: {
+      table: {
+        disable: true
+      }
+    }
+  },
+  render: (args) => {
+    const container = document.createElement('div');
+    container.innerHTML = textAnimationHtml;
+    
+    let textAnimation;  
+    
+    textAnimation = new FadeAnimation(container, args.Text, args.Speed, args.Direction);
+    
+    return container;
+  },
+};

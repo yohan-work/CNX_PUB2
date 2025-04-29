@@ -11,10 +11,11 @@ export class TextAnimation {
     this.init(changeText, speed, direction);
   }
 
-  typing(text, speed, direction) {
+  fade(text, speed, direction) {
     const splitText = new SplitText(text, { type: "words,chars" });
     gsap.from(splitText.chars, {
       opacity: 0,
+      y: 10,
       stagger: {
         each: speed,
         from: direction,
@@ -32,6 +33,6 @@ export class TextAnimation {
         }
       )
     }
-    this.typing(text, speed, direction);
+    this.fade(text, speed, direction);
   }
-}
+} 
