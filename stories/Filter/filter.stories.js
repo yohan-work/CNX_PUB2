@@ -1,5 +1,5 @@
-import { Filter } from './Filter';
-import './Filter.css';
+import { Filter } from './filter';
+import './filter.css';
 
 export default {
   title: 'Components/Filter',
